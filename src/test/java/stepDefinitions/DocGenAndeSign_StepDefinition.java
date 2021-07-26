@@ -1,6 +1,8 @@
 package stepDefinitions;
 
 
+import java.io.File;
+
 import APITesting.Briix.Request;
 import io.cucumber.java.en.Given;
 
@@ -32,6 +34,25 @@ public class DocGenAndeSign_StepDefinition extends Request{
 	      response=request.body(body).post(url);
 	      response.prettyPrint();
 	 }
+	 @When("user send request")
+	    public void user_sends_request() throws Throwable {
+		  request.header("authorizeToken", Login_StepDefinition.authorizedToken);
+		  String path = new File(".").getCanonicalPath();
+		  response=request.multiPart("file", new File(path+"/src/test/java/Documents/Lease_Agreement.docx")).
+	    	         multiPart("file", new File(path+"/src/test/java/Documents/Loan_Agreement.docx")).
+	    	         multiPart("file", new File(path+"/src/test/java/Documents/Power_Of_Attorney.docx")).
+	    	         multiPart("file", new File(path+"/src/test/java/Documents/Term_Sheet.docx")).
+	    	         multiPart("file", new File(path+"/src/test/java/Documents/Transaction_Documents.docx")).
+	    	         multiPart("propertyId", "14").
+	    	         
+	    	         post("/Dev/documentManagement/api/v1.0/documents/upload");
+	      response.prettyPrint();
+	 }
+	 @Given("Post Upload Document API")
+     public void Post_upload_document_api() throws Throwable {     
+    	request=Request.getUploadDocumentURL();
+ 
+    }
 //	 @When("sends get request")
 //	    public void sends_get_request() throws Throwable {
 //		  request.header("authorizeToken", Login_StepDefinition.authorizedToken);

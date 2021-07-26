@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(
 		features="src/test/java/features",
 		glue="stepDefinitions",
-        tags= "@signAll",    
+        tags= "@UploadDocuments",    
         monochrome=true, dryRun=false,
         plugin= {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
 				"pretty","html:target/report.html","junit:target/report.xml","json:target/report.json"}

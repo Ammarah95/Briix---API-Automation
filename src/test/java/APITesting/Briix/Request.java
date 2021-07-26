@@ -39,11 +39,25 @@ public class Request {
 		headers(); 
 		return request;
 	}
-	public static RequestSpecification getDocumentManagementURL() throws Throwable {
+	public static RequestSpecification getOnboardingURL() throws Throwable {
 		callingGlobalProperty();
 		String Base_request=prop.getProperty("DocumentManagement_URL");
 		RestAssured.baseURI  =  Base_request;
 		headers();
+		return request;
+		}
+	public static RequestSpecification getDocumentManagementURL() throws Throwable {
+		callingGlobalProperty();
+		String Base_request=prop.getProperty("Onboarding_URL");
+		RestAssured.baseURI  =  Base_request;
+		headers();
+		return request;
+		}
+	public static RequestSpecification getUploadDocumentURL() throws Throwable {
+		callingGlobalProperty();
+		String Base_request=prop.getProperty("DocumentManagement_URL");
+		RestAssured.baseURI  =  Base_request;
+		request  =  RestAssured.given();
 		return request;
 		}
 	public static RequestSpecification getLoanURL() throws Throwable {

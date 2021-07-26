@@ -36,6 +36,11 @@ Feature: Document Generation and eSignature Collection
       |         14 |    200 |
       |         12 |    400 |
       
+    @UploadDocuments 
+  Scenario: Once the upload document api hit then response should be correct
+    Given Post Upload Document API
+    When user send request
+    Then Status_code equals 200
       
 
  
