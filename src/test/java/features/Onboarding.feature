@@ -8,7 +8,6 @@ Feature: Onboarding Collection
   #When User Verify the OTP
   #Then Extract the token
   #And User is authorized
-  
   @CustomerSignin
   Scenario Outline: Once the get all request api hit then response should be correct
     Given post onboarding API
@@ -16,11 +15,11 @@ Feature: Onboarding Collection
     Then Status_code equals <status>
 
     Examples: 
-      | emailId                  | password  | status |
-      | ammarah@transformhub.com | Test@1234 |    200 |
+      | emailId                     | password  | status |
+      | ammarah@transformhub.com    | Test@1234 |    200 |
       | ammarah123@transformhub.com | Test@1234 |    400 |
-      
-      @AdminSignin
+
+  @AdminSignin
   Scenario Outline: Once the get all request api hit then response should be correct
     Given post onboarding API
     When send body "{\"emailId\":\"<emailId>\",\"password\":\"<password>\"}" and send Https request "/Dev/api/admin/signin"
@@ -32,4 +31,13 @@ Feature: Onboarding Collection
       | Test123@transformhub.com | Test@1234 |    400 |
       
 
- 
+  @VerifyRegistrationOTP
+  Scenario Outline: Once the get all request api hit then response should be correct
+    Given post onboarding API
+    When send body "{\"otp\":\"<otp>\",\"emailId\":\"<emailId>\",\"password\":\"<password>\"}" and send Https request "/Dev/api/user/verifyregotp"
+    Then Status_code equals <status>
+
+    Examples: 
+      | otp    | emailId                  | password  | status |
+      | 234567 | ammarah@transformhub.com | Test@1234 |    200 |
+      | 123456 | Test123@transformhub.com | Test@1234 |    400 |
